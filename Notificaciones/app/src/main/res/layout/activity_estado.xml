@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.carlos.notificaciones.ActivityEstado">
+
+    <Button
+        android:id="@+id/btnNew"
+        android:onClick="newNotify"
+        android:text="NUEVA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnPerma"
+        android:onClick="permanentlyNotify"
+        android:text="Permanente (User can't remove)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnBigText"
+        android:onClick="bigTextStyle"
+        android:text="Big Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnBigPicture"
+        android:onClick="bigPictureStyle"
+        android:text="Big Picture Style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnInbox"
+        android:onClick="inboxStyle"
+        android:text="Inbox Style (add data)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnBotones"
+        android:onClick="buttonStyle"
+        android:text="CON BOTONES"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnRemove"
+        android:onClick="remove"
+        android:text="Remover"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

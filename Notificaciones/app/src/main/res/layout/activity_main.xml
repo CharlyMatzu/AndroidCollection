@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.carlos.notificaciones.MainActivity">
+
+    <Button
+        android:id="@+id/btnToast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="toast"
+        android:text="Toast"/>
+
+    <Button
+        android:id="@+id/btnEstado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="estado"
+        android:text="Estado"/>
+
+    <Button
+        android:id="@+id/btnDialogo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dialogo"/>
+
+    <Button
+        android:id="@+id/btnSnack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Snack bar"/>
+
+
+</LinearLayout>
