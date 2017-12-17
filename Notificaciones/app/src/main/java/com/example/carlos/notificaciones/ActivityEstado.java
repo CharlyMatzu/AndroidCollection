@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -107,6 +108,10 @@ public class ActivityEstado extends AppCompatActivity {
 
     private void active(Notification notify){
         nManager.notify(id, notify);
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        v.vibrate(300);
+        //Star wars theme
+        //v.vibrate(new long[]{0, 500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500}, -1);
     }
 
     private void setSettings(Notification.Builder builder, CharSequence titulo, CharSequence desc){
