@@ -28,6 +28,7 @@ public class ActivityEstado extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estado);
+        setTitle("Barra de estado");
 
         btnNew = (Button) findViewById(R.id.btnNew);
         btnPerma = (Button) findViewById(R.id.btnPerma);

@@ -1,5 +1,5 @@
-# Lector QR
-A QR Reader using zxing Library: https://github.com/zxing/zxing
+# QRReader
+A QR Reader using barcodescanner (zxing) Library: https://github.com/dm77/barcodescanner
 
 # Notificaciones
 Using Bar state notifications, Toast, Dialog and Snackbar
