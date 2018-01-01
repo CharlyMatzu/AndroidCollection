@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/item_op1"
+        android:title="Opcion 1"
+        android:icon="@android:drawable/sym_action_email"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/item_op2"
+        android:title="Opcion 2"
+        android:icon="@android:drawable/sym_action_email"
+        app:showAsAction="withText"
+        />
+
+    <item
+        android:id="@+id/item_op3"
+        android:title="Opcion 3"
+        android:icon="@android:drawable/sym_action_email"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/item_op4"
+        android:title="Opcion 4"
+        android:checkable="true"
+        android:icon="@android:drawable/sym_action_email"
+        app:showAsAction="never"
+        />
+
+
+    <!--ifRoom. Se mostrará como botón de acción sólo si hay espacio disponible.-->
+    <!--withText. Se mostrará el texto de la opción junto al icono en el caso de que éste se esté mostrando como botón de acción.-->
+    <!--never. La opción siempre se mostrará como parte del menú de overflow.-->
+    <!--always. La opción siempre se mostrará como botón de acción. Este valor puede provocar que los elementos se solapen si no hay espacio suficiente para ellos.-->
+
+    <!--NOTA: se pueden poner mas de una opcion ifRoom|withText-->
+
+</menu>

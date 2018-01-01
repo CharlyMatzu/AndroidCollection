@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context="com.example.charly.uicollect.MainActivity">
+
+    <TextView
+        android:text="MENU"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnMenuAB"
+        android:text="ActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="showMenuAB"
+        />
+
+    <Button
+        android:id="@+id/btnMenuTB"
+        android:text="Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="showMenuTB"
+        />
+
+    <TextView
+        android:text="BACK BUTTON"
+        android:layout_marginTop="14dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnActivityActionBar"
+        android:text="ActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="showActivityActionbar"
+        />
+
+
+    <Button
+        android:id="@+id/btnActivityToolbar"
+        android:text="Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="showActivityToolbar"
+        />
+
+</LinearLayout>
