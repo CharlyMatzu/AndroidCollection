@@ -8,11 +8,18 @@ import com.example.charly.uicollect.R;
 
 public class ActivityBackToolbar extends AppCompatActivity {
 
-    private Toolbar tb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_back_toolbar);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
+        toolbar.setTitle("Toolbar");
+        setSupportActionBar(toolbar);
+
+        //Activa el boton de retroceso (debe indicar el padre en el manifest)
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 }

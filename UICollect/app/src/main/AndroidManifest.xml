@@ -26,6 +26,7 @@
         <!--Se le puso el tema que quita el actionbar por defecto ubicado en res > values > Styles.xml-->
         <activity
             android:name=".BackButton.ActivityBackToolbar"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/NoActionBar" />
     </application>
 

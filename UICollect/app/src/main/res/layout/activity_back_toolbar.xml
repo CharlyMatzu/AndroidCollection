@@ -8,19 +8,17 @@
     tools:context="com.example.charly.uicollect.BackButton.ActivityBackToolbar">
 
 
+    <!--Toolbar de material design-->
+    <!--Este debe ser agregado desde codigo de forma dinamica-->
+    <include
+        android:id="@+id/appbar"
+        layout="@layout/toolbar"/>
+
+
+
     <TextView
         android:text="Activity sin ActionBar y con Toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-
-    <!--Toolbar de material design-->
-    <!--Este debe ser agregado desde codigo de forma dinamica-->
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/tbBackButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </android.support.v7.widget.Toolbar>
 
 </LinearLayout>
