@@ -3,27 +3,32 @@
     package="com.example.charly.firebasetest">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".AddCochesActivity">
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".AuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".AddCochesActivity"></activity>-->
+        <!-- <activity android:name=".AddCochesActivity"></activity> -->
 
         <service
             android:name=".ServicioFirebase"
             android:enabled="true"
-            android:exported="true" >
-        </service>
+            android:exported="true"></service>
+
+        <!--<activity-->
+            <!--android:name=".AuthActivity"-->
+            <!--android:label="@string/title_activity_auth"-->
+            <!--android:theme="@style/AppTheme.NoActionBar"></activity>-->
     </application>
 
 </manifest>
