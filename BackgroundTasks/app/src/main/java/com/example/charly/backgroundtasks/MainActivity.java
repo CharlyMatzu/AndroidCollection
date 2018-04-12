@@ -1,4 +1,4 @@
-package com.example.charly.network;
+package com.example.charly.backgroundtasks;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

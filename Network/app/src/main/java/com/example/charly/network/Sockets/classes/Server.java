@@ -16,7 +16,7 @@ public class Server extends Thread {
     private int port;
     private boolean serverON;
 
-    private String localIP = null;
+    private String localIP = "";
 
 
     public Server(Receiver receiver, int port) {
@@ -54,9 +54,12 @@ public class Server extends Thread {
             server = new ServerSocket(port);
             Log.i("SERVER", "Accept clients");
 
-            localIP = InetAddress.getLocalHost().getHostAddress();
+            //localIP = InetAddress.getLocalHost().getHostAddress();
+            receiver.notifyInitServer();
 
             clientSocket = server.accept();
+
+
 
         }catch(IOException ex){
             Log.e("SERVER", ex.getMessage());

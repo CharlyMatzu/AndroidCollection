@@ -8,7 +8,8 @@ import android.net.wifi.p2p.WifiP2pManager.Channel;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.charly.socketsandwifi.R;
+import com.example.charly.network.R;
+
 
 public class WifiDirect extends AppCompatActivity implements WifiP2pManager.ActionListener{
 
@@ -22,7 +23,7 @@ public class WifiDirect extends AppCompatActivity implements WifiP2pManager.Acti
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_reach_address);
 
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);

@@ -26,7 +26,8 @@ public class SocketActivity extends AppCompatActivity implements Receiver {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.socket_activity);
+        setTitle("Sockets");
 
         txtIP = (EditText) findViewById(R.id.txtIP);
         btnConnect = (Button) findViewById(R.id.btnConnect);
@@ -43,15 +44,25 @@ public class SocketActivity extends AppCompatActivity implements Receiver {
     }
 
     public void startServer(View view) {
+        lblStatus.setText( "Iniciando server..." );
         server = new Server(this, 9090);
-        lblStatus.setText( server.getLocalIp() );
+        server.start();
     }
 
     @Override
-    public void notify(String message) {
+    public void receiveMessage(String message) {
         Toast.makeText(getApplicationContext(), "socket Message received", Toast.LENGTH_LONG).show();
         String history = lblMessages.getText().toString();
         lblMessages.setText(history +"\n"+ message);
+    }
+
+    @Override
+    public void notifyInitServer() {
+        String ip = server.getLocalIp();
+        if( !ip.isEmpty() )
+            lblStatus.setText( ip );
+        else
+            lblStatus.setText( "NO IP" );
     }
 
     public void sendMessage(View view) {
