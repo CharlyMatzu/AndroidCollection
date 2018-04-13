@@ -1,9 +1,9 @@
-package com.example.charly.network.Sockets.classes;
+package com.example.charly.network.Sockets.Thread.classes;
 
+import android.os.Handler;
 import android.util.Log;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -15,6 +15,8 @@ public class Server extends Thread {
     private Receiver receiver;
     private int port;
     private boolean serverON;
+
+    private Handler handler;
 
     private String localIP = "";
 
@@ -55,7 +57,13 @@ public class Server extends Thread {
             Log.i("SERVER", "Accept clients");
 
             //localIP = InetAddress.getLocalHost().getHostAddress();
-            receiver.notifyInitServer();
+
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    receiver.notifyInitServer();
+                }
+            });
 
             clientSocket = server.accept();
 

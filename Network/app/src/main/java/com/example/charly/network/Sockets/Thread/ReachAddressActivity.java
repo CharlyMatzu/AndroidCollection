@@ -1,4 +1,4 @@
-package com.example.charly.network.Sockets;
+package com.example.charly.network.Sockets.Thread;
 
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;

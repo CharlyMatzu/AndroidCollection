@@ -1,4 +1,4 @@
-package com.example.charly.network.Sockets.classes;
+package com.example.charly.network.Sockets.Thread.classes;
 
 public interface Receiver {
 

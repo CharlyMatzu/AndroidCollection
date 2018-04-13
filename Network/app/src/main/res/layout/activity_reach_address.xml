@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context="com.example.charly.network.Sockets.ReachAddressActivity">
+    tools:context="com.example.charly.network.Sockets.Thread.ReachAddressActivity">
 
     <EditText
         android:id="@+id/txtIP"

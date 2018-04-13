@@ -1,4 +1,4 @@
-package com.example.charly.network.Sockets;
+package com.example.charly.network.Sockets.AsyncTask;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,12 +9,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.charly.network.R;
-import com.example.charly.network.Sockets.classes.Client;
-import com.example.charly.network.Sockets.classes.Receiver;
-import com.example.charly.network.Sockets.classes.Server;
+import com.example.charly.network.Sockets.AsyncTask.classes.Client;
+import com.example.charly.network.Sockets.AsyncTask.classes.Receiver;
+import com.example.charly.network.Sockets.AsyncTask.classes.Server;
 
 
-public class SocketActivity extends AppCompatActivity implements Receiver {
+public class AsyncActivity extends AppCompatActivity implements Receiver {
 
     private Button btnConnect, btnSearch, btnStart;
     private EditText txtIP;
@@ -26,15 +26,15 @@ public class SocketActivity extends AppCompatActivity implements Receiver {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.socket_activity);
+        setContentView(R.layout.async_activity);
         setTitle("Sockets");
 
-        txtIP = (EditText) findViewById(R.id.txtIP);
+//        txtIP = (EditText) findViewById(R.id.txtIP);
         btnConnect = (Button) findViewById(R.id.btnConnect);
         //btnSearch = (Button) findViewById(R.id.btnSearch);
         btnStart = (Button) findViewById(R.id.btnStart);
         lblStatus = (TextView) findViewById(R.id.lblStatus);
-        lblMessages = (TextView) findViewById(R.id.lblMessages);
+//        lblMessages = (TextView) findViewById(R.id.lblMessages);
     }
 
 
@@ -46,24 +46,34 @@ public class SocketActivity extends AppCompatActivity implements Receiver {
     public void startServer(View view) {
         lblStatus.setText( "Iniciando server..." );
         server = new Server(this, 9090);
-        server.start();
+        server.execute();
     }
 
     @Override
-    public void receiveMessage(String message) {
+    public void sayMessageEntry(String message) {
         Toast.makeText(getApplicationContext(), "socket Message received", Toast.LENGTH_LONG).show();
         String history = lblMessages.getText().toString();
         lblMessages.setText(history +"\n"+ message);
     }
 
     @Override
-    public void notifyInitServer() {
-        String ip = server.getLocalIp();
-        if( !ip.isEmpty() )
-            lblStatus.setText( ip );
-        else
-            lblStatus.setText( "NO IP" );
+    public void sayServerStarted() {
+        //Toast.makeText(getApplicationContext(), "Server iniciado", Toast.LENGTH_LONG).show();
+        //lblStatus.setText( server.getLocalIp() );
+        lblStatus.setText( "Server iniciado" );
     }
+
+    @Override
+    public void sayServerStopped() {
+        //Toast.makeText(getApplicationContext(), "Server detenido", Toast.LENGTH_LONG).show();
+        lblStatus.setText( "Server detenido" );
+    }
+
+    @Override
+    public void sayServerError(String msg) {
+        Toast.makeText(getApplicationContext(), "Error: "+msg, Toast.LENGTH_LONG).show();
+    }
+
 
     public void sendMessage(View view) {
         client = new Client(txtIP.getText().toString(), 9090);
