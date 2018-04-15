@@ -1,44 +1,60 @@
 package com.example.charly.network.Sockets.AsyncTask.classes;
 
+import android.content.Context;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.text.format.Formatter;
 import android.util.Log;
 
+import com.example.charly.network.Sockets.AsyncTask.classes.interfaces.IReceiver;
+
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import static android.content.Context.WIFI_SERVICE;
 
-public class Server extends AsyncTask<Void, Integer, Void> {
+
+class Server extends AsyncTask<Void, Integer, Void> {
 
     private final String TAG = "SERVER";
     private ServerSocket server;
     private Socket clientSocket;
-    private Receiver receiver;
+    private IReceiver receiver;
     private boolean isServerON;
     private int port;
+    private String messsage;
     private boolean serverON;
+    private Context context;
     private String localIP = "";
     private String errorMessage = "";
 
     private final int STARTED = 1;
     private final int STOPPED = 2;
-    private final int ERROR = 3;
+    private final int RECEIVED = 3;
+    private final int ERROR = 4;
 
 
 
     //TODO: make singleton
-    public Server(Receiver receiver, int port) {
+    protected Server(IReceiver receiver, Context context, int port) {
         this.receiver = receiver;
         this.port = port;
+        this.context = context;
     }
 
 
-    public String getLocalIp(){
-        return localIP;
+    //TODO: debe usar el wifi
+    protected String getLocalIp(){
+        WifiManager wm = (WifiManager) this.context.getSystemService(WIFI_SERVICE);
+        //TODO: actualizar
+        localIP = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
+        return localIP+":"+port;
     }
 
-    public void stopServer(){
+    protected void stopServer(){
         this.isServerON = false;
     }
 
@@ -49,10 +65,22 @@ public class Server extends AsyncTask<Void, Integer, Void> {
             server = new ServerSocket(port);
             Log.i(TAG, "Accept clients");
 
-            localIP = InetAddress.getLocalHost().getHostAddress();
+            localIP = InetAddress.getLocalHost().getHostAddress()+":"+port;
             publishProgress(this.STARTED);
+            DataInputStream input;
 
-            clientSocket = server.accept();
+            while(isServerON){
+                clientSocket = server.accept();
+
+                input = new DataInputStream( clientSocket.getInputStream() );
+                messsage = input.readUTF();
+                input.close();
+
+                publishProgress(this.RECEIVED);
+            }
+
+            server.close();
+
 
         }catch(IOException ex){
             errorMessage = ex.getMessage();
@@ -82,9 +110,7 @@ public class Server extends AsyncTask<Void, Integer, Void> {
     protected Void doInBackground(Void... voids) {
         Log.i(TAG, "Background");
 
-        while(isServerON){
-            startListen();
-        }
+        startListen();
 
         return null;
     }
@@ -100,8 +126,9 @@ public class Server extends AsyncTask<Void, Integer, Void> {
         Log.i(TAG, "Update");
 
         switch ( values[0] ){
-            case STARTED: receiver.sayServerStarted(); break;
+            case STARTED: receiver.sayServerStarted( getLocalIp() ); break;
             case STOPPED: receiver.sayServerStopped(); break;
+            case RECEIVED: receiver.sayMessageEntry(messsage); break;
             case ERROR: receiver.sayServerError( errorMessage ); break;
 
             default: break;
@@ -110,11 +137,11 @@ public class Server extends AsyncTask<Void, Integer, Void> {
         super.onProgressUpdate(values);
     }
 
+
     @Override
     protected void onPostExecute(Void aVoid) {
 
         Log.i(TAG, "Post - Finish");
-
         super.onPostExecute(aVoid);
     }
 }

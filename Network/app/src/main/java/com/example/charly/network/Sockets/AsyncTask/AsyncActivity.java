@@ -9,19 +9,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.charly.network.R;
-import com.example.charly.network.Sockets.AsyncTask.classes.Client;
-import com.example.charly.network.Sockets.AsyncTask.classes.Receiver;
-import com.example.charly.network.Sockets.AsyncTask.classes.Server;
+import com.example.charly.network.Sockets.AsyncTask.classes.FSocket;
+import com.example.charly.network.Sockets.AsyncTask.classes.interfaces.IReceiver;
+import com.example.charly.network.Sockets.AsyncTask.classes.interfaces.ISender;
 
 
-public class AsyncActivity extends AppCompatActivity implements Receiver {
+public class AsyncActivity extends AppCompatActivity implements IReceiver, ISender {
 
     private Button btnConnect, btnSearch, btnStart;
-    private EditText txtIP;
+    private EditText txtIP, txtMessage;
     private TextView lblStatus, lblMessages;
+    private FSocket fSocket;
 
-    private Server server;
-    private Client client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,24 +28,23 @@ public class AsyncActivity extends AppCompatActivity implements Receiver {
         setContentView(R.layout.async_activity);
         setTitle("Sockets");
 
-//        txtIP = (EditText) findViewById(R.id.txtIP);
-        btnConnect = (Button) findViewById(R.id.btnConnect);
-        //btnSearch = (Button) findViewById(R.id.btnSearch);
+        fSocket = new FSocket();
+
+        txtIP = (EditText) findViewById(R.id.txtIP);
+        txtMessage = (EditText) findViewById(R.id.txtMessage);
+        btnConnect = (Button) findViewById(R.id.btnSend);
+//        btnSearch = (Button) findViewById(R.id.btnSearch);
         btnStart = (Button) findViewById(R.id.btnStart);
         lblStatus = (TextView) findViewById(R.id.lblStatus);
-//        lblMessages = (TextView) findViewById(R.id.lblMessages);
+        lblMessages = (TextView) findViewById(R.id.lblMessages);
     }
 
 
-    public void search(View view) {
-//        Intent i = new Intent(getApplicationContext(), ServerListActivity.class);
-//        startActivity(i);
-    }
+
 
     public void startServer(View view) {
         lblStatus.setText( "Iniciando server..." );
-        server = new Server(this, 9090);
-        server.execute();
+        fSocket.startServer(this, getApplicationContext(), 9090);
     }
 
     @Override
@@ -57,10 +55,10 @@ public class AsyncActivity extends AppCompatActivity implements Receiver {
     }
 
     @Override
-    public void sayServerStarted() {
+    public void sayServerStarted(String ip) {
         //Toast.makeText(getApplicationContext(), "Server iniciado", Toast.LENGTH_LONG).show();
         //lblStatus.setText( server.getLocalIp() );
-        lblStatus.setText( "Server iniciado" );
+        lblStatus.setText( ip );
     }
 
     @Override
@@ -76,7 +74,18 @@ public class AsyncActivity extends AppCompatActivity implements Receiver {
 
 
     public void sendMessage(View view) {
-        client = new Client(txtIP.getText().toString(), 9090);
-        client.send("Hola mundo");
+        String msg = txtMessage.getText().toString();
+        String ip = txtIP.getText().toString();
+        fSocket.sendMessage(this, msg, ip, 9090);
+    }
+
+    @Override
+    public void sayClientError(String msg) {
+
+    }
+
+    @Override
+    public void sayMessageSent() {
+
     }
 }

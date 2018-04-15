@@ -15,7 +15,7 @@
         android:hint="192.168.1.10" />
 
     <Button
-        android:id="@+id/btnConnect"
+        android:id="@+id/btnSend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Connect"

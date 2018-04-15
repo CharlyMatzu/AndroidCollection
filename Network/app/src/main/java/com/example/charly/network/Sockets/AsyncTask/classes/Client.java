@@ -1,47 +1,37 @@
 package com.example.charly.network.Sockets.AsyncTask.classes;
 
+import android.os.AsyncTask;
 import android.util.Log;
+
+import com.example.charly.network.Sockets.AsyncTask.classes.interfaces.ISender;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
 //TODO: make singleton
-public class Client extends Thread {
+class Client extends AsyncTask<String, Integer, Void>{
 
     private Socket serverSocket;
     private DataOutputStream dataOutput;
-    private String message;
+    private ISender sender;
 
-    private String ip;
+    private String host;
     private int port;
 
 
-    public Client (String ip, int port){
-        this.ip = ip;
+    protected Client (String ipHost, int port, ISender sender){
+        this.host = ipHost;
         this.port = port;
-    }
-
-    public void send(String message){
-        this.message = message;
-        this.run();
+        this.sender = sender;
     }
 
 
-    /**
-     * Run Thread, don not use this method directly,
-     * use {@link #send(String)} method instead
-     */
-    @Override
-    public void run() {
-        sendMessage();
-    }
-
-    private void sendMessage() {
+    private void sendMessage(String message) {
         try{
 
             Log.i("SOCKET", "Connecting...");
-            serverSocket = new Socket(ip, port);
+            serverSocket = new Socket(host, port);
             Log.i("SOCKET", "Sending...");
             dataOutput = new DataOutputStream( serverSocket.getOutputStream() );
             dataOutput.writeUTF(message);
@@ -56,5 +46,29 @@ public class Client extends Thread {
         }catch(IOException ex){
             Log.e("SERVER", ex.getMessage());
         }
+    }
+
+
+    @Override
+    protected Void doInBackground(String... params) {
+        sendMessage( params[0] );
+        return null;
+    }
+
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        sender.sayMessageSent();
+        super.onPostExecute(aVoid);
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
     }
 }

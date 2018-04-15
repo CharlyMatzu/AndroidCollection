@@ -30,7 +30,7 @@ public class SocketActivity extends AppCompatActivity implements Receiver {
         setTitle("Sockets");
 
 //        txtIP = (EditText) findViewById(R.id.txtIP);
-        btnConnect = (Button) findViewById(R.id.btnConnect);
+        btnConnect = (Button) findViewById(R.id.btnSend);
         //btnSearch = (Button) findViewById(R.id.btnSearch);
         btnStart = (Button) findViewById(R.id.btnStart);
         lblStatus = (TextView) findViewById(R.id.lblStatus);
